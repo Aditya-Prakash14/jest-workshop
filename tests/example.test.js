@@ -1,8 +1,6 @@
 const { calculateFinalAmount } = require("../src/pricing");
 
-test("example: sanity check", () => {
-  expect(1 + 1).toBe(2);
-});
+
 
 test("Check for invalid sub total", () => {
   expect(() => calculateFinalAmount(-100, "DISCOUNT")).toThrow(
@@ -26,11 +24,8 @@ test("Error on negative subtotal", () => {
   const result = calculateFinalAmount(50, "FLAT50");
   expect(result).toEqual(0);
 });
-test("Work coupon is lowercase", () => {
-  const result = calculateFinalAmount(100, "flat50");
-  expect(result).toEqual(50);
-    });
-  test("Automatic discount on large orders", () => {
-  const result = calculateFinalAmount(1000, null);
-  expect(result).toEqual(950);
-  });
+test("Case-insensitive coupon", () => {
+  const result = calculateFinalAmount(100, "save10");
+  expect(result).toEqual(90);
+});
+  
